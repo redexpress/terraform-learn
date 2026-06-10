@@ -21,8 +21,8 @@ jobs:
           curl -sSL -o /tmp/local.zip https://releases.hashicorp.com/terraform-provider-local/2.9.0/terraform-provider-local_2.9.0_linux_amd64.zip
           unzip -o -j /tmp/http.zip -d "$PLUGIN_DIR/http/3.6.0/linux_amd64/"
           unzip -o -j /tmp/local.zip -d "$PLUGIN_DIR/local/2.9.0/linux_amd64/"
-          mv "$PLUGIN_DIR/http/3.6.0/linux_amd64/terraform-provider-http_v3.6.0" "$PLUGIN_DIR/http/3.6.0/linux_amd64/terraform-provider-http_v3.6.0_x4"
-          mv "$PLUGIN_DIR/local/2.9.0/linux_amd64/terraform-provider-local_v2.9.0" "$PLUGIN_DIR/local/2.9.0/linux_amd64/terraform-provider-local_v2.9.0_x4"
+          mv "$PLUGIN_DIR/http/3.6.0/linux_amd64/terraform-provider-http_v3.6.0_x5" "$PLUGIN_DIR/http/3.6.0/linux_amd64/terraform-provider-http_v3.6.0_x4"
+          mv "$PLUGIN_DIR/local/2.9.0/linux_amd64/terraform-provider-local_v2.9.0_x5" "$PLUGIN_DIR/local/2.9.0/linux_amd64/terraform-provider-local_v2.9.0_x4"
           chmod +x "$PLUGIN_DIR/http/3.6.0/linux_amd64/terraform-provider-http_v3.6.0_x4"
           chmod +x "$PLUGIN_DIR/local/2.9.0/linux_amd64/terraform-provider-local_v2.9.0_x4"
 
