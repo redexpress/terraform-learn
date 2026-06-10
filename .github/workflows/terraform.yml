@@ -7,9 +7,6 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: playground/http
     steps:
       - uses: actions/checkout@v4
 
@@ -18,9 +15,11 @@ jobs:
           terraform_version: 1.6.0
 
       - name: terraform init
+        working-directory: playground/http
         env:
-          TF_SKIP_PROVIDER_VERIFY: "1"
+          TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.github/terraform.rc
         run: terraform init -input=false -no-color
 
       - name: terraform apply
+        working-directory: playground/http
         run: terraform apply -auto-approve
