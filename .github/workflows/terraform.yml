@@ -2,8 +2,6 @@ name: terraform
 
 on:
   push:
-    paths:
-      - 'playground/http/**'
   workflow_dispatch:
 
 jobs:
@@ -20,7 +18,9 @@ jobs:
           terraform_version: 1.6.0
 
       - name: terraform init
-        run: terraform init
+        env:
+          TF_SKIP_PROVIDER_VERIFY: "1"
+        run: terraform init -input=false -no-color
 
       - name: terraform apply
         run: terraform apply -auto-approve
