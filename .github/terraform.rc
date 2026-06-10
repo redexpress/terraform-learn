@@ -1,5 +1,0 @@
-provider_installation {
-  direct {
-    skip_provider_verify = true
-  }
-}

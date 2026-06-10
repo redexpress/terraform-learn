@@ -10,14 +10,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install provider plugins
+        working-directory: playground/http
+        run: |
+          mkdir -p .terraform/plugins/registry.terraform.io/hashicorp/http/3.6.0/linux_amd64
+          mkdir -p .terraform/plugins/registry.terraform.io/hashicorp/local/2.9.0/linux_amd64
+          curl -sSL -o .terraform/plugins/registry.terraform.io/hashicorp/http/3.6.0/linux_amd64/terraform-provider-http_v3.6.0_x5 https://releases.hashicorp.com/terraform-provider-http/3.6.0/terraform-provider-http_3.6.0_linux_amd64.zip
+          curl -sSL -o .terraform/plugins/registry.terraform.io/hashicorp/local/2.9.0/linux_amd64/terraform-provider-local_v2.9.0_x5 https://releases.hashicorp.com/terraform-provider-local/2.9.0/terraform-provider-local_2.9.0_linux_amd64.zip
+          unzip -o -q .terraform/plugins/registry.terraform.io/hashicorp/http/3.6.0/linux_amd64/terraform-provider-http_v3.6.0_x5 -d .terraform/plugins/registry.terraform.io/hashicorp/http/3.6.0/linux_amd64/
+          unzip -o -q .terraform/plugins/registry.terraform.io/hashicorp/local/2.9.0/linux_amd64/terraform-provider-local_v2.9.0_x5 -d .terraform/plugins/registry.terraform.io/hashicorp/local/2.9.0/linux_amd64/
+          rm .terraform/plugins/registry.terraform.io/hashicorp/http/3.6.0/linux_amd64/terraform-provider-http_v3.6.0_x5
+          rm .terraform/plugins/registry.terraform.io/hashicorp/local/2.9.0/linux_amd64/terraform-provider-local_v2.9.0_x5
+          chmod +x .terraform/plugins/registry.terraform.io/hashicorp/http/3.6.0/linux_amd64/terraform-provider-http_v3.6.0
+          chmod +x .terraform/plugins/registry.terraform.io/hashicorp/local/2.9.0/linux_amd64/terraform-provider-local_v2.9.0
+
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.6.0
 
       - name: terraform init
         working-directory: playground/http
-        env:
-          TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.github/terraform.rc
         run: terraform init -input=false -no-color
 
       - name: terraform apply
